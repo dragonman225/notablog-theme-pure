@@ -1,0 +1,80 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Chrome, Firefox OS and Opera Status Bar Color -->
+  <meta name="theme-color" content="#FFFFFF">
+  <meta property="og:title" content="{{post.title}}">
+  <meta property="og:description" content="{{post.descriptionPlainText}}">
+  <meta property="og:type" content="blog">
+  <title>{{post.icon}} {{post.title}}</title>
+  <link rel="stylesheet" type="text/css" href="css/prism.css">
+  <link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
+  <link rel="stylesheet" type="text/css" href="css/layout.css">
+  <link rel="stylesheet" type="text/css" href="css/notion-color.css">
+  <link rel="stylesheet" type="text/css" href="css/theme.css">
+  <link rel="stylesheet" type="text/css" href="css/debug.css">
+  <link rel="stylesheet" type="text/css" href="css/notablog.css">
+  <style>
+    :root {
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <a href="index.html">
+      <div class="nav-btn">{{siteMetadata.icon}} Home</div>
+    </a>
+    <span class="nav-breadcrumb-slash">&centerdot;</span>
+    <a href="bookshelf.html">
+      <div class="nav-btn">Bookshelf</div>
+    </a>
+    <span class="nav-breadcrumb-slash">&centerdot;</span>
+    <a href="about.html">
+      <div class="nav-btn">About</div>
+    </a>
+    <!-- <span class="nav-breadcrumb-slash">/</span>
+    <a href="">
+      <div class="nav-btn">{{post.icon}} {{post.title}}</div>
+    </a> -->
+  </nav>
+  <div class="container">
+    <div id="post-body" class="fill-h">
+      {{if(options.post.cover)}}
+      <div class="page-cover">
+        <img src="{{post.cover}}">
+      </div>
+      {{/if}}
+      <div id="{{post.id}}" class="page-title {{if(!options.post.cover)}}page-title--nocover{{/if}}">
+        <div class="page-icon">{{post.icon}}</div>
+        <h1>{{post.title}}</h1>
+        <div class="block block--text meta">
+          {{if(options.post.hideFromIndex !== true)}}
+          <span class="meta--date">{{post.createdTimeHumanReadable}}</span>
+          {{/if}}
+          {{each(options.post.tags)}}
+          <span class="meta--tag {{@this.color}}">{{@this.value}}</span>
+          {{/each}}
+        </div>
+      </div>
+      {{content}}
+    </div>
+    <footer>
+      <div class="site-footer">
+        <div>&copy; {{siteMetadata.title}} 2019</div>
+        <div>&centerdot;</div>
+        <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
+            rel="noopener noreferrer">Notablog</a>.
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
