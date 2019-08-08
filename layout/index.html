@@ -9,9 +9,11 @@
   <!-- Chrome, Firefox OS and Opera Status Bar Color -->
   <meta name="theme-color" content="#FFFFFF">
   <meta property="og:title" content="{{siteMetadata.title}}">
-  <meta property="og:description" content="Home of {{siteMetadata.title}}.">
+  {{if(options.siteMetadata.description)}}
+  <meta property="og:description" content="{{siteMetadata.descriptionPlainText}}">
+  {{/if}}
   <meta property="og:type" content="blog">
-  <title>{{siteMetadata.icon}} {{siteMetadata.title}}</title>
+  <title>{{siteMetadata.title}}</title>
   <link rel="stylesheet" type="text/css" href="css/prism.css">
   <link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
   <link rel="stylesheet" type="text/css" href="css/layout.css">
@@ -29,7 +31,7 @@
 <body>
   <nav class="nav">
     <a href="index.html">
-      <div class="nav-btn">{{siteMetadata.icon}} Home</div>
+      <div class="nav-btn">{{siteMetadata.iconHTML}} Home</div>
     </a>
     <span class="nav-breadcrumb-slash">&centerdot;</span>
     <a href="bookshelf.html">
@@ -47,15 +49,22 @@
     </div>
     {{/if}}
     <div class="page-title {{if(!options.siteMetadata.cover)}}page-title--nocover{{/if}}">
-      <div class="page-icon">{{siteMetadata.icon}}</div>
+      <div class="page-icon">{{siteMetadata.iconHTML}}</div>
       <h1>{{siteMetadata.title}}</h1>
     </div>
+    {{if(options.siteMetadata.description)}}
+    <div>
+      <span class="quote--big">&ldquo;</span>
+      {{siteMetadata.descriptionHTML}}
+      <span class="quote--big">&bdquo;</span>
+    </div>
+    {{/if}}
     <div class="fill-h">
       {{each(options.index.posts)}}
       <div class="post-brief">
         <div class="block">
           <h3>
-            {{@this.icon}}
+            {{@this.iconHTML}}
             <a href="{{@this.customUrl}}" class="post-brief--title">
               {{@this.title}}
             </a>

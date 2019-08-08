@@ -11,7 +11,7 @@
   <meta property="og:title" content="{{post.title}}">
   <meta property="og:description" content="{{post.descriptionPlainText}}">
   <meta property="og:type" content="blog">
-  <title>{{post.icon}} {{post.title}}</title>
+  <title>{{post.title}}</title>
   <link rel="stylesheet" type="text/css" href="css/prism.css">
   <link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
   <link rel="stylesheet" type="text/css" href="css/layout.css">
@@ -29,7 +29,7 @@
 <body>
   <nav class="nav">
     <a href="index.html">
-      <div class="nav-btn">{{siteMetadata.icon}} Home</div>
+      <div class="nav-btn">{{siteMetadata.iconHTML}} Home</div>
     </a>
     <span class="nav-breadcrumb-slash">&centerdot;</span>
     <a href="bookshelf.html">
@@ -52,7 +52,7 @@
       </div>
       {{/if}}
       <div id="{{post.id}}" class="page-title {{if(!options.post.cover)}}page-title--nocover{{/if}}">
-        <div class="page-icon">{{post.icon}}</div>
+        <div class="page-icon">{{post.iconHTML}}</div>
         <h1>{{post.title}}</h1>
         <div class="block block--text meta">
           {{if(options.post.hideFromIndex !== true)}}
