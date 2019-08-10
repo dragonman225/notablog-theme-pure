@@ -56,7 +56,7 @@
         <h1>{{post.title}}</h1>
         <div class="block block--text meta">
           {{if(options.post.hideFromIndex !== true)}}
-          <span class="meta--date">{{post.createdTimeHumanReadable}}</span>
+          <span class="meta--date">Publish on {{post.createdTimeHumanReadable}}</span>
           {{/if}}
           {{each(options.post.tags)}}
           <span class="meta--tag {{@this.color}}">{{@this.value}}</span>
