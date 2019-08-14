@@ -9,7 +9,9 @@
   <!-- Chrome, Firefox OS and Opera Status Bar Color -->
   <meta name="theme-color" content="#FFFFFF">
   <meta property="og:title" content="{{post.title}}">
-  <meta property="og:description" content="{{post.descriptionPlainText}}">
+  {{if(options.post.description.length > 0)}}
+  <meta property="og:description" content="{{post.descriptionPlain}}">
+  {{/if}}
   <meta property="og:type" content="blog">
   <title>{{post.title}}</title>
   <link rel="stylesheet" type="text/css" href="css/prism.css">
@@ -29,20 +31,16 @@
 <body>
   <nav class="nav">
     <a href="index.html">
-      <div class="nav-btn">{{siteMetadata.iconHTML}} Home</div>
+      <div class="nav-btn">{{siteMeta.iconHTML}} <span>Home</span></div>
     </a>
+    {{each(options.siteMeta.pages)}}
+    {{if(@this.publish && @this.inMenu)}}
     <span class="nav-breadcrumb-slash">&centerdot;</span>
-    <a href="bookshelf.html">
-      <div class="nav-btn">Bookshelf</div>
+    <a href="{{@this.url}}">
+      <div class="nav-btn">{{@this.iconHTML}} <span>{{@this.title}}</span></div>
     </a>
-    <span class="nav-breadcrumb-slash">&centerdot;</span>
-    <a href="about.html">
-      <div class="nav-btn">About</div>
-    </a>
-    <!-- <span class="nav-breadcrumb-slash">/</span>
-    <a href="">
-      <div class="nav-btn">{{post.icon}} {{post.title}}</div>
-    </a> -->
+    {{/if}}
+    {{/each}}
   </nav>
   <div class="container">
     <div id="post-body" class="fill-h">
@@ -55,8 +53,8 @@
         <div class="page-icon">{{post.iconHTML}}</div>
         <h1>{{post.title}}</h1>
         <div class="block block--text meta">
-          {{if(options.post.hideFromIndex !== true)}}
-          <span class="meta--date">Publish on {{post.createdTimeHumanReadable}}</span>
+          {{if(options.post.inList)}}
+          <span class="meta--date">Posted on {{post.createdTimeHumanReadable}}</span>
           {{/if}}
           {{each(options.post.tags)}}
           <span class="meta--tag {{@this.color}}">{{@this.value}}</span>
@@ -67,7 +65,7 @@
     </div>
     <footer>
       <div class="site-footer">
-        <div>&copy; {{siteMetadata.title}} 2019</div>
+        <div>&copy; {{siteMeta.title}} 2019</div>
         <div>&centerdot;</div>
         <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
             rel="noopener noreferrer">Notablog</a>.

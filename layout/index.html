@@ -8,12 +8,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <!-- Chrome, Firefox OS and Opera Status Bar Color -->
   <meta name="theme-color" content="#FFFFFF">
-  <meta property="og:title" content="{{siteMetadata.title}}">
-  {{if(options.siteMetadata.description)}}
-  <meta property="og:description" content="{{siteMetadata.descriptionPlainText}}">
+  <meta property="og:title" content="{{siteMeta.title}}">
+  {{if(options.siteMeta.description.length > 0)}}
+  <meta property="og:description" content="{{siteMeta.descriptionPlain}}">
   {{/if}}
   <meta property="og:type" content="blog">
-  <title>{{siteMetadata.title}}</title>
+  <title>{{siteMeta.title}}</title>
   <link rel="stylesheet" type="text/css" href="css/prism.css">
   <link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
   <link rel="stylesheet" type="text/css" href="css/layout.css">
@@ -31,41 +31,42 @@
 <body>
   <nav class="nav">
     <a href="index.html">
-      <div class="nav-btn">{{siteMetadata.iconHTML}} Home</div>
+      <div class="nav-btn">{{siteMeta.iconHTML}} <span>Home</span></div>
     </a>
+    {{each(options.siteMeta.pages)}}
+    {{if(@this.publish && @this.inMenu)}}
     <span class="nav-breadcrumb-slash">&centerdot;</span>
-    <a href="bookshelf.html">
-      <div class="nav-btn">Bookshelf</div>
+    <a href="{{@this.url}}">
+      <div class="nav-btn">{{@this.iconHTML}} <span>{{@this.title}}</span></div>
     </a>
-    <span class="nav-breadcrumb-slash">&centerdot;</span>
-    <a href="about.html">
-      <div class="nav-btn">About</div>
-    </a>
+    {{/if}}
+    {{/each}}
   </nav>
   <div class="container">
-    {{if(options.siteMetadata.cover)}}
+    {{if(options.siteMeta.cover)}}
     <div class="page-cover">
-      <img src="{{siteMetadata.cover}}">
+      <img src="{{siteMeta.cover}}">
     </div>
     {{/if}}
-    <div class="page-title {{if(!options.siteMetadata.cover)}}page-title--nocover{{/if}}">
-      <div class="page-icon">{{siteMetadata.iconHTML}}</div>
-      <h1>{{siteMetadata.title}}</h1>
+    <div class="page-title {{if(!options.siteMeta.cover)}}page-title--nocover{{/if}}">
+      <div class="page-icon">{{siteMeta.iconHTML}}</div>
+      <h1>{{siteMeta.title}}</h1>
     </div>
-    {{if(options.siteMetadata.description)}}
+    {{if(options.siteMeta.description)}}
     <div>
       <span class="quote--big">&ldquo;</span>
-      {{siteMetadata.descriptionHTML}}
+      {{siteMeta.descriptionHTML}}
       <span class="quote--big">&bdquo;</span>
     </div>
     {{/if}}
     <div class="fill-h">
       {{each(options.index.posts)}}
+      {{if(@this.publish && @this.inList)}}
       <div class="post-brief">
         <div class="block">
           <h3>
             {{@this.iconHTML}}
-            <a href="{{@this.customUrl}}" class="post-brief--title">
+            <a href="{{@this.url}}" class="post-brief--title">
               {{@this.title}}
             </a>
           </h3>
@@ -74,17 +75,18 @@
           {{@this.descriptionHTML}}
         </div>
         <div class="block block--text meta">
-          <span class="meta--date">{{@this.createdTimeHumanReadable}}</span>
+          <span class="meta--date">Posted on {{@this.createdTimeHumanReadable}}</span>
           {{each(@this.tags)}}
           <span class="meta--tag {{@this.color}}">{{@this.value}}</span>
           {{/each}}
         </div>
       </div>
+      {{/if}}
       {{/each}}
     </div>
     <footer>
       <div class="site-footer">
-        <div>&copy; {{siteMetadata.title}} 2019</div>
+        <div>&copy; {{siteMeta.title}} 2019</div>
         <div>&centerdot;</div>
         <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
             rel="noopener noreferrer">Notablog</a>.
