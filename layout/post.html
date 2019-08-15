@@ -53,8 +53,8 @@
         <div class="page-icon">{{post.iconHTML}}</div>
         <h1>{{post.title}}</h1>
         <div class="block block--text meta">
-          {{if(options.post.inList)}}
-          <span class="meta--date">Posted on {{post.createdTimeHumanReadable}}</span>
+          {{if(options.post.date)}}
+          <span class="meta--date">Posted on {{post.dateString}}</span>
           {{/if}}
           {{each(options.post.tags)}}
           <span class="meta--tag {{@this.color}}">{{@this.value}}</span>
