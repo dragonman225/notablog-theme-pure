@@ -52,6 +52,7 @@
       <div id="{{post.id}}" class="page-title {{if(!options.post.cover)}}page-title--nocover{{/if}}">
         <div class="page-icon">{{post.iconHTML}}</div>
         <h1>{{post.title}}</h1>
+        {{if(options.post.date || options.post.tags.length)}}
         <div class="block block--text meta">
           {{if(options.post.date)}}
           <span class="meta--date">Posted on {{post.dateString}}</span>
@@ -60,6 +61,7 @@
           <span class="meta--tag {{@this.color}}">{{@this.value}}</span>
           {{/each}}
         </div>
+        {{/if}}
       </div>
       {{post.contentHTML}}
     </div>
